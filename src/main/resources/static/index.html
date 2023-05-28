@@ -28,10 +28,11 @@
             function tryLogIn() {
                 let nickname = document.getElementById('nickname').value;
                 let pw = document.getElementById('loginpw').value;
+                let name=document.querySelector("#nickname").value;
                 if (nickname == '') {
                     alert('input something!');
                 }
-                else location.href = '/manage';
+                else location.href = `/manage?name=${name}`;
             }
       </script>
 </body>

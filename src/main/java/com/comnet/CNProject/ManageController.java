@@ -8,6 +8,6 @@ public class ManageController {
 
     @GetMapping("/manage")
     public String showManagePage() {
-        return "manage.html";
+        return "game.html";
     }
 }
