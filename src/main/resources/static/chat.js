@@ -4,7 +4,8 @@ var socket = new SockJS("/websocket")
 var stompClient = Stomp.over(socket)
 var questionBtn = document.querySelector("#question")
 var submitBtn = document.querySelector("#send")
-var name=new URLSearchParams(location.search).get("name") //처음 페이지에서 입력한 이름 가져옴
+var name= new URLSearchParams(location.search).get("name") //처음 페이지에서 입력한 이름 가져옴
+var profile = new URLSearchParams(location.search).get("profile") // 선택한 이미지의 이름을 가져옴
 document.querySelector("#name").innerText=`당신의 이름 : ${name}`
 document.querySelector("#count").innerText=`남은 횟수 : 20`
 questionBtn.addEventListener("click", sendQuestion)
@@ -18,7 +19,7 @@ stompClient.connect({}, function (frame) {
     stompClient.send("/app/enter",{},
         JSON.stringify({
             "sender" : name,
-            "profile" : "asdf" //이미지를 바이너리 데이터로 변환해서 보냄
+            "profile" : profile //이미지를 바이너리 데이터로 변환해서 보냄?
         })
     )
 });
@@ -29,7 +30,7 @@ function sendMessage(e){
             JSON.stringify({
                 "sender" : name,
                 "content" : sendBtnValue,
-                "profile" : "asdf" //이미지를 바이너리 데이터로 변환해서 보냄
+                "profile" : profile //이미지를 바이너리 데이터로 변환해서 보냄?
             })
         )
 }
@@ -39,7 +40,7 @@ function sendQuestion(e){
             JSON.stringify({
                 "sender" : name,
                 "content" : sendBtnValue,
-                "profile" : "asdf" //이미지를 바이너리 데이터로 변환해서 보냄
+                "profile" : profile //이미지를 바이너리 데이터로 변환해서 보냄?
             })
         )
 }
