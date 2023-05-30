@@ -5,7 +5,10 @@
     <title>twenty_gogae</title>
     <meta name="viewport" content="width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
     <style>
-
+        .image_view {
+            margin-left: 10px;
+            border: 2px solid transparent;
+        }
     </style>
 </head>
 <body style="background-color: #ededed; padding: 0; margin: 0;">
@@ -15,25 +18,40 @@
             <fieldset style="border: none;">
                 <label style="display: block; font-size: 12px; color: #333; margin-bottom: 10px;" for="nickname">nickname</label>
                 <input style="width: 600px; display: block; height: 50px; margin-bottom: 25px; border: none; background-color: #ededed; padding: 0 20px; box-sizing: border-box;" type="text" id="nickname" placeholder="nickname">
-                <label style="display: block; font-size: 12px; color: #333; margin-bottom: 10px;" for="loginpw">password</label>
-                <input style="width: 600px; display: block; height: 50px; margin-bottom: 25px; border: none; background-color: #ededed; padding: 0 20px; box-sizing: border-box;" type="password" id="loginpw" placeholder="But what we really need is image, not password.">
-                <ul style="width: 100%; text-align: right; margin-bottom: 60px;">
+                <label style="display: block; font-size: 12px; color: #333; margin-bottom: 10px;">Select Profile : </label>
+                <div style="width: 600px; height: 50px; margin-bottom: 100px; border: none; padding: 0 20px; box-sizing: border-box;" type="password" id="profile" placeholder="But what we really need is image, not password.">
+                    <img src="../image/default.png" alt="default" class="image_view" onclick="select(this)">
+                    <img src="../image/bird.jpg" alt="bird" class="image_view" onclick="select(this)">
+                    <img src="../image/cat.jpg" alt="cat" class="image_view" onclick="select(this)">
+                    <img src="../image/pineapple.jpg" alt="pineapple" class="image_view" onclick="select(this)">
+                </div>
+                <!--ul style="width: 100%; text-align: right; margin-bottom: 20px;">
                     <li style="display: inline-block; height: 12px; line-height: 12px; list-style: none;"><a style="color: #333; font-size: 12px; position: relative; top: -2px; text-decoration: none;" href="#">forgot id/pw?</a></li>
-                </ul>
+                </ul-->
                 <button style="display: block; width: 220px; height: 50px; margin: 0 auto; border: none; background-color: #1673ea; color: #fff; font-size: 14px; cursor: pointer;" type="button" onclick="tryLogIn();">Login</button>
             </fieldset>
         </form>
     </div>
     <script>
-            function tryLogIn() {
-                let nickname = document.getElementById('nickname').value;
-                let pw = document.getElementById('loginpw').value;
-                let name=document.querySelector("#nickname").value;
-                if (nickname == '') {
-                    alert('input something!');
-                }
-                else location.href = `/manage?name=${name}`;
+        let selectedImage = null;
+
+        function select(img) {
+            if (selectedImage) {
+                selectedImage.style.borderColor = "transparent";
             }
+            img.style.borderColor = "purple";
+            selectedImage = img;
+        }
+
+        function tryLogIn() {
+            let nickname = document.getElementById('nickname').value;
+            let image = selectedImage.alt;
+            let name=document.querySelector("#nickname").value;
+            if (nickname == '') {
+                alert('input something!');
+            }
+            else location.href = `/manage?name=${name}&profile=${image}`;
+        }
       </script>
 </body>
 </html>
