@@ -13,10 +13,12 @@
         <h2 style="width: 100%;">Login</h2>
         <form style="width: 100%; height: 450px; background-color: #fff; padding: 60px; box-sizing: border-box;" action="#" method="get">
             <fieldset style="border: none;">
+
                 <label style="display: block; font-size: 12px; color: #333; margin-bottom: 10px;" for="nickname">nickname</label>
                 <input style="width: 600px; display: block; height: 50px; margin-bottom: 25px; border: none; background-color: #ededed; padding: 0 20px; box-sizing: border-box;" type="text" id="nickname" placeholder="nickname">
                 <label style="display: block; font-size: 12px; color: #333; margin-bottom: 10px;" for="loginpw">password</label>
                 <input style="width: 600px; display: block; height: 50px; margin-bottom: 25px; border: none; background-color: #ededed; padding: 0 20px; box-sizing: border-box;" type="password" id="loginpw" placeholder="But what we really need is image, not password.">
+                <input type="file" id="imagee">제출</input>
                 <ul style="width: 100%; text-align: right; margin-bottom: 60px;">
                     <li style="display: inline-block; height: 12px; line-height: 12px; list-style: none;"><a style="color: #333; font-size: 12px; position: relative; top: -2px; text-decoration: none;" href="#">forgot id/pw?</a></li>
                 </ul>
@@ -25,14 +27,42 @@
         </form>
     </div>
     <script>
+
+
             function tryLogIn() {
                 let nickname = document.getElementById('nickname').value;
                 let pw = document.getElementById('loginpw').value;
                 let name=document.querySelector("#nickname").value;
-                if (nickname == '') {
-                    alert('input something!');
+
+
+
+                let inputElement = document.getElementById("imagee");
+                let file = inputElement.files[0];
+                let reader = new FileReader();
+                let result="none"
+                reader.onloadend = function(){
+                    fetch("/join", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: name,
+                    profile: reader.result,
+                    role:""
+                  }),
+                }).then((response)=>{
+                    if (nickname == '') {
+                        alert('input something!');
+                    }
+                    else location.href = `/manage?name=${name}`;
+                    }
+                )
                 }
-                else location.href = `/manage?name=${name}`;
+                reader.readAsDataURL(file)
+
+
+
             }
       </script>
 </body>

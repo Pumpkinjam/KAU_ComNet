@@ -47,11 +47,17 @@ function onMessage(message){
     const tr = document.createElement("tr")
     const role = document.createElement("td")
     role.innerText=message.role
+    const profile = document.createElement("td")
+    const img = document.createElement("img")
+    img.src=message.profile
+    img.style="width:40px; height:40px;"
+    profile.appendChild(img)
     const sender = document.createElement("td")
     sender.innerText=message.sender
     const message2 = document.createElement("td")
     message2.innerText=message.content
     tr.appendChild(role)
+    tr.appendChild(profile)
     tr.appendChild(sender)
     tr.appendChild(message2)
     const body = document.querySelector("#chat-body")
