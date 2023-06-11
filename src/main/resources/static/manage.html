@@ -22,33 +22,6 @@
     </form>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 초기 질문의 입력값 설정
-        document.getElementById('query').value = '사람인가요?';
-    });
-
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const answer = document.getElementById('answer').value;
-
-        // 스무고개 게임 로직
-        let targetQuery = ''; // 정답 질문
-
-        // 답변에 따라 질문 초기 값 설정
-        if (answer === '예') {
-            targetQuery = '대한민국 사람인가요?';
-        } else if (answer === '아니요') {
-            targetQuery = '동물인가요?';
-        }
-
-        // '예'나 '아니요'를 입력한 경우 질문 값 변경
-        if (answer === '예' || answer === '아니요') {
-            document.getElementById('query').value = targetQuery;
-        }
-    });
-</script>
 
 </body>
 </html>
